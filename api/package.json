@@ -1,0 +1,19 @@
+{
+  "name": "questionresponse",
+  "version": "1.0.0",
+  "description": "une application de question reponse",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "Mohamed Koureissy",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "fs.promises": "^0.1.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^3.0.1",
+    "path": "^0.12.7"
+  }
+}
