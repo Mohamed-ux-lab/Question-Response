@@ -1,40 +1,28 @@
-
 const express = require('express')
-const mysql = require('mysql')
+const { createConnection } = require('mysql')
+const { default: root } = require('./router/root')
+const cors = require('cors')
+
 const app = express()
 const port = 3000
 
-const connection = mysql.createConnection({
-    host:'localhost',
-    user:'root',
-    password:'',
-    database:'question/responce'
+app.get("/api/getquestion",cors({ origin: "http://localhost:8000"}), (req, res) => {
+    const con = createConnection({
+        host:'localhost',
+        user:'root',
+        password:'',
+        database:'question/responce'
+    })
+    function getRandomArbitrary(max) {
+        return Math.floor(Math.random() * max);
+      }
+    const id = getRandomArbitrary(10)  
+    const query = "SELECT * FROM `openquizzdb` WHERE `langue`='fr' AND `quizz_id`= ?"
+    con.query(query, [id], (err, result) => {
+        if(err) throw err
+        res.status(200).json(result)
+    })
 })
-
-// connection.connect(function(e){
-//     try{
-//         connection.query(
-//             "SELECT * FROM `openquizzdb` WHERE `langue`='fr' LIMIT 10",
-//             function (err, result){
-//                 try{
-//                     console.log(result)
-//                 }catch(e){
-//                     console.log('Désoler !! ${err:messqge}')
-//                 }
-//             }
-//         )
-//     }catch(e){
-//         console.error('Désoler !! ${err:message}')
-//     }
-// })
-const query = "SELECT * FROM `openquizzdb` WHERE `langue`='fr' AND `quizz_id`=1"
-connection.query(
-    "SELECT * FROM `openquizzdb` WHERE `langue`='fr' AND `quizz_id`=1",
-    function (err, result) {       
-		if (err) throw err;       
-		console.log(result);     
-	}
-)
 
 app.listen(port, () => {
     console.log('Le serveur est en ligne')

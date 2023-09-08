@@ -10,6 +10,7 @@
   "author": "Mohamed Koureissy",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "fs.promises": "^0.1.2",
     "mysql": "^2.18.1",
